@@ -43,7 +43,7 @@ if uploaded_file is not None:
         # For most active users (Group level only)
         if selected_user == 'Overall':
             st.title('Most Active Users')
-            x = helper.most_active_users(df)
+            x, new_df = helper.most_active_users(df)
             fig, ax = plt.subplots()
 
             col1, col2 = st.columns(2)
@@ -52,3 +52,6 @@ if uploaded_file is not None:
                 ax.bar(x.index, x.values)
                 plt.xticks(rotation = 'vertical')
                 st.pyplot(fig)
+
+            with col2:
+                st.dataframe(new_df)

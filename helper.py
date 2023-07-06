@@ -28,6 +28,8 @@ def most_active_users(df):
     x = df['user'].value_counts().head()
     if len(x) <= 4:
         x = df['user'].value_counts().head(3)
-    return x
+
+    df = round((df['user'].value_counts()/ df.shape[0])*100, 2).reset_index().rename(columns={'index': 'name', 'user': 'percent'})
+    return x, df
 
 
