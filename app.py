@@ -39,19 +39,36 @@ if uploaded_file is not None:
             st.header("Total Links Shared")
             st.title(links)
 
+    # For most active users (Group level only)
+    if selected_user == 'Overall':
+        st.title('Most Active Users')
+        x, new_df = helper.most_active_users(df)
+        fig, ax = plt.subplots()
 
-        # For most active users (Group level only)
-        if selected_user == 'Overall':
-            st.title('Most Active Users')
-            x, new_df = helper.most_active_users(df)
-            fig, ax = plt.subplots()
+        col1, col2 = st.columns(2)
 
-            col1, col2 = st.columns(2)
+        with col1:
+            ax.bar(x.index, x.values)
+            plt.xticks(rotation = 'vertical')
+            st.pyplot(fig)
 
-            with col1:
-                ax.bar(x.index, x.values)
-                plt.xticks(rotation = 'vertical')
-                st.pyplot(fig)
+        with col2:
+            st.dataframe(new_df)
 
-            with col2:
-                st.dataframe(new_df)
+    st.title("WordCloud")
+    df_wc = helper.create_worldcloud(selected_user, df)
+    fig, ax = plt.subplots()
+    ax.imshow(df_wc)
+    st.pyplot(fig)
+
+    #most common words
+
+    st.title('Common Words')
+    common_df = helper.most_common_words(selected_user, df)
+    fig, ax = plt.subplots()
+    ax.barh(common_df[0], common_df[1])
+    plt.xticks(rotation='vertical')
+    st.pyplot(fig)
+
+
+
