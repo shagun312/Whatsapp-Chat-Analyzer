@@ -1,2 +1,2 @@
-A python based chat analyzer and is developed using streamlit and data preprocessing techniques
+A python based chat analyzer developed using streamlit and data preprocessing techniques
 
